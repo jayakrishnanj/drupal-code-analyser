@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { Button, TextField, Typography, CircularProgress, Box, Container } from '@mui/material';
@@ -34,10 +34,26 @@ const Home = () => {
     setIsLoading(false);
   };
 
+  const handleDownloadMarkdown = () => {
+    // Create a Blob with the markdown content
+    const blob = new Blob([response], { type: 'text/markdown' });
+    // Create an object URL for the Blob
+    const url = URL.createObjectURL(blob);
+    // Create a temporary anchor element
+    const a = document.createElement('a');
+    // Set the download name and href for the anchor
+    a.download = 'analysis_report.md';
+    a.href = url;
+    // Trigger the download by programmatically clicking the anchor
+    a.click();
+    // Revoke the object URL to free up resources
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <Container>
       <Typography variant="h1" component="h2" gutterBottom>
-        Drupal Project Code Analysis
+        Drupal Code Review
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box mb={2}>
@@ -57,12 +73,23 @@ const Home = () => {
         </Box>
       </form>
       {response && (
-        <Box mt={4}>
-          <Typography variant="h2" component="h3">
-            Analysis Result
-          </Typography>
-          <pre>{response}</pre>
-        </Box>
+        <>
+          <Box mt={4}>
+            <Typography variant="h2" component="h3">
+              Analysis Result
+            </Typography>
+            <pre>{response}</pre>
+            {/* Button to download the report as a markdown file */}
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleDownloadMarkdown}
+              style={{ marginTop: '20px' }} // Adding some spacing above the button
+            >
+              Download as Markdown
+            </Button>
+          </Box>
+        </>
       )}
     </Container>
   );

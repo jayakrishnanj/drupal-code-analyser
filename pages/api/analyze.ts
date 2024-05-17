@@ -35,9 +35,9 @@ async function analyzeDirectory(directoryPath: string): Promise<AnalysisResult[]
       try {
         // Requesting a review of the code from the OpenAI API
         analysisResponse = await openai.chat.completions.create({
-          model: 'gpt-4',
+          model: 'gpt-4-turbo',
           messages: [
-            { role: 'system', content: 'You are a proficient code reviewer.' },
+            { role: 'system', content: 'You are a proficient Drupal code reviewer and doing a Security and Performance Audit.' },
             { role: 'user', content: `Please review the following Drupal module code:\n\n${content}` },
           ],
         });
