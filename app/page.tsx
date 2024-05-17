@@ -52,8 +52,8 @@ const Home = () => {
 
   return (
     <Container>
-      <Typography variant="h1" component="h2" gutterBottom>
-        Drupal Code Review
+      <Typography variant="h2" component="h3" gutterBottom>
+      Automated Code Review for Drupal Projects using OpenAI
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box mb={2}>
@@ -78,9 +78,8 @@ const Home = () => {
             <Typography variant="h2" component="h3">
               Analysis Result
             </Typography>
-            <pre>{response}</pre>
-            {/* Button to download the report as a markdown file */}
-            <Button
+             {/* Button to download the report as a markdown file */}
+             <Button
               variant="contained"
               color="secondary"
               onClick={handleDownloadMarkdown}
@@ -88,6 +87,7 @@ const Home = () => {
             >
               Download as Markdown
             </Button>
+            <pre>{response}</pre>
           </Box>
         </>
       )}
